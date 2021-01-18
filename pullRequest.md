@@ -17,10 +17,12 @@
 ### 4. github 사이트에서 Compare & Pull Request 버튼 클릭
 
 1. **Compare & Pull request** 
+ 
 ![image](https://user-images.githubusercontent.com/42290273/104888154-b07c0a00-59af-11eb-8715-e6a44bbef1cc.png)
 
 
 **2. Create pull Request** 
+
 ![image](https://user-images.githubusercontent.com/42290273/104888170-b7a31800-59af-11eb-801c-a0bd8c4fb389.png)
 
 
