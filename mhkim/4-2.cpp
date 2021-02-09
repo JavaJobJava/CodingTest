@@ -31,7 +31,6 @@ int main()
     }
 
     cout << cnt << '\n';
-    ㄷ
 
-        return 0;
+    return 0;
 }
