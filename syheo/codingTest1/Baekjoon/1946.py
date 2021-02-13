@@ -27,6 +27,7 @@
 
 
 from operator import itemgetter
+import sys
 
 #입력값 받기 
 T = int(input())
@@ -39,30 +40,22 @@ for i in range(T):
     maxd = 100001
     maxi = 100001
     N = int(input())
-    rank = []
-    
+    rank=[]
+    #rank = [() for _ in range(N)]
     for j in range(N):
-        rank.append(tuple(map(int,input().split())))
+        rank.append(tuple(map(int, sys.stdin.readline().split())))
+        #swap 
+        if j>0:
+            if rank[j][0] < rank[j-1][0]:
+                rank[j],rank[j-1] = rank[j-1], rank[j]
     print(rank)
-    rank.sort(key=itemgetter(0),reverse=False)
-
-    print("1",end="\n")
-    
-
-
-    # # 다차원 배열 정렬 방법 sort(reverse=?, key=itemgetter(index,) 
-    # rank.sort(key=itemgetter(0),reverse=False)
-    # # 검사 
-    # for k in range(1,N):
-    #     check = 1
-    #     for j in range(k):
-    #         if rank[j][1]<rank[k][1]:
-    #             check = 0
-    #     if check==1:
-    #         cnt[i] +=1
-
-# for c in cnt:
-#     print(c,end=" ")
-
+    for x,y in rank:
+        if y<maxi:
+            cnt[i]+=1
+            maxi=y
+        if maxi==1:
+            break
+for cntitem in cnt:
+    print(cntitem)
 
 
