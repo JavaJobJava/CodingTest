@@ -25,37 +25,35 @@
 ## 4번째 시도 
 # 정렬 후 랭크 max 값 설정으로 비교 
 
+#sys.stdin.readline을 input 대신에 사용하자
+#input은 prompt message를 인자로받고 출력하고, 개행문자를 삭제하므로 입력이 많을 땐 너무 느려 시간초과가 발생!!
+
+# 이문제에서 또 팁은 rank가 동순위가 없다는 점. 그래서 바로 rank-1를 index로 생각해 입력과 동시에 정렬할 수 있다!!!
+
 
 from operator import itemgetter
 import sys
-
+input = sys.stdin.readline
 #입력값 받기 
 T = int(input())
-# 채용 최대 인원 
-cnt = [0 for _ in range(T)]
 
 for i in range(T):
     # 채용 최대 인원 
-    #cnt = 0
-    maxd = 100001
+    cnt = 0
     maxi = 100001
     N = int(input())
-    rank=[]
-    #rank = [() for _ in range(N)]
+    rank = [0]*N
+    #정렬하며 입력 받기 (동순위가 없음)
     for j in range(N):
-        rank.append(tuple(map(int, sys.stdin.readline().split())))
-        #swap 
-        if j>0:
-            if rank[j][0] < rank[j-1][0]:
-                rank[j],rank[j-1] = rank[j-1], rank[j]
-    print(rank)
-    for x,y in rank:
-        if y<maxi:
-            cnt[i]+=1
-            maxi=y
+        doc, interview = map(int, input().split())
+        rank[doc-1] = interview    
+    
+    for x in rank:
+        if x<maxi:
+            cnt+=1
+            maxi=x
         if maxi==1:
             break
-for cntitem in cnt:
-    print(cntitem)
+    print(cnt)
 
 
