@@ -21,6 +21,7 @@
 ## 3번째 시도 
 # 규칙-> 두 점수가 모두 다른 지원자보다 낮으면 탈락 
 # max 값으로 설정 후 비교 
+# 입력 받을 때마다 검사 후 맥스값 설정 
 ## 4번째 시도 
 # 정렬 후 랭크 max 값 설정으로 비교 
 
@@ -38,31 +39,15 @@ for i in range(T):
     maxd = 100001
     maxi = 100001
     N = int(input())
-    rank = [() for _ in range(N)]
-    for j in range(N):
-        rank[j] = tuple(map(int,input().split()))
-        # # 검사
-        # if maxd>rank[j][0]: 
-        #     maxd=rank[j][0]
-        # elif maxi>rank[j][1]:
-        #     maxi=rank[j][1]
-        
-        # else:
-        #     pass
-    #print(maxd,maxi)
+    rank = []
     
-    document = sorted(rank,key=itemgetter(0))
-    for x,y in document:
-        if y<maxi:
-            cnt[i]+=1
-            maxi=y
-        if maxi==1:
-            break
-    #interview = sorted(rank,key=itemgetter(1))
-    #print(document)
-    #print(interview)
-for cntitem in cnt:
-    print(cntitem)
+    for j in range(N):
+        rank.append(tuple(map(int,input().split())))
+    print(rank)
+    rank.sort(key=itemgetter(0),reverse=False)
+
+    print("1",end="\n")
+    
 
 
     # # 다차원 배열 정렬 방법 sort(reverse=?, key=itemgetter(index,) 
