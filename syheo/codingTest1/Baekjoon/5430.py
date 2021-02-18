@@ -14,36 +14,53 @@
 
 from sys import stdin
 import ast
+from collections import deque
+
 input = stdin.readline
 
+
+is_error = False
 #테스트 케이스 갯수
 T = int(input())
 #테스트 케이스 입력
 for i in range(T):
     p = input()
     n = int(input())
-    arr = ast.literal_eval(input())
-    cmds = p.split(sep='D')
-    #cmds = []
-    #print('cmds=',cmds)
+    arr =ast.literal_eval(input())
+    queue = deque(arr)
+    sentence = ""
     cnt=0
-    for j in range(len(cmds)-1):
-        if len(arr)==0:
-            print('error')
+    for cmd in p:
+        if cmd =='\n':
             break
-        if cmds[j].count('R')%2==0:
-            arr.pop(0)
-        elif cmds[j].count('R')%2==1:
+        if cmd=="R":
             cnt+=1
-            arr.pop(len(arr)-1)
-       
-        
-    if len(arr)!=0:
+        elif cmd=="D":
+            if len(queue)==0:
+                is_error = True
+                break
+            elif cnt%2==0:
+                queue.popleft()
+            elif cnt%2==1:
+                queue.pop()
+
+    if len(queue)!=0:
         if cnt%2==1:
-            arr.reverse()
-        print(arr)
+            queue.reverse()
+        #문자열 제조
+        sentence='['
+        for i in range(len(queue)):
+            sentence+=str(queue[i])
+            if i!=len(queue)-1:
+                sentence+=','
+        
+        sentence+=']'
+
+    elif is_error:
+        sentence="error"
+    else : 
+        sentence='[]'
+    print(sentence)
+    
         
     
-
-
-

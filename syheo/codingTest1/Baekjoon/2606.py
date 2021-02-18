@@ -42,6 +42,7 @@ def dfs(linked,node,visited):
             cnt += dfs(linked,i,visited)
         else:
             pass 
+    
     return cnt
 #1 컴퓨터 방문 처리
 visited[1] = True
