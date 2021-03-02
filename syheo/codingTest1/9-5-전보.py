@@ -1,25 +1,25 @@
 #CH9 최단 경로
-#예제 9-2
-#개선된 다익스트라 알고리즘 
+#예제 9-5
+#전보
+
+#N개 도시 
+#C 도시 위급 상황
+#메시지를 보낼 수 있는 총 도시 수, 총 걸리는 시간 출력 
 
 import heapq
-import sys
-input = sys.stdin.readline
-INF = int(1e9) # 무한을 의미하는 값으로 10억 설정
 
-#노드의 개수, 간선의 개수를 입력 받기 
-n,m = map(int,input().split())
-#시작 노드 번호를 입력받기
-start = int(input())
+INF = int(1e9)
+#도시 수 , 도로 수, 메시지 보내는 도시 
+N,M,C = map(int,input().split())
+
 #각 노드에 연결되어 있는 노드에 대한 정보를 담는 리스트 만들기
-graph = [ [] for i in range(n+1)]
-#방문한적이 있는지 체크하는 목적의 리스트를 만들기
-visited = [False]*(n+1)
+graph = [ [] for i in range(N+1)]
+
 #최단 거리 테이블을 모두 무한으로 초기화
-distance = [INF] * (n+1)
+distance = [INF] * (N+1)
 
 #모든 간선 정보를 입력받기
-for _ in range(m):
+for _ in range(M):
     a,b,c = map(int, input().split())
     # a번 노드에서 b번 노드로 가는 비용이 c라는 의미
     graph[a].append((b,c))
@@ -46,14 +46,23 @@ def dijkstra(start):
 
 
 #다익스트라 알고리즘 수행 
-dijkstra(start)
+dijkstra(C)
+cntCity = 0 
+cntDist = 0 
 
+maxDist = 0
+
+print(distance)
 #모든 노드로 가기 위한 최단 거리를 출력
-for i in range(1,n+1):
+for i in range(1,N+1):
     #도달할 수 없는 경우, 무한(INFINITY)이라고 출력
-    if distance[i] == INF:
-        print("INFINITY")
-    #도달할 수 있는 경우 거리를 출력
-    else:
-        print(distance[i])
+    if distance[i] != INF and i!=C:
+        cntCity+=1
+        maxDist = max(maxDist,distance[i])
+        cntDist+=distance[i]
+
+#print(cntCity,cntDist,sep=' ')
+print(cntCity,maxDist,sep=' ')
+
         
+

@@ -1,29 +1,33 @@
 #CH9 최단 경로
-#예제 9-2
-#개선된 다익스트라 알고리즘 
+#예제 9-4
+#미래도시
 
+# 방문 판매원 A는 현재 1번 회사에 위치해 있으며, X번 회사에 방문해 물건을 판매
+# 또한 연결된 2개의 회사는 양방향으로 이동할 수 있음.
+# 거리 이동 시간은 모두 1
+# 소개팅 회사 K번 
+# A->K->X
 import heapq
-import sys
-input = sys.stdin.readline
-INF = int(1e9) # 무한을 의미하는 값으로 10억 설정
 
-#노드의 개수, 간선의 개수를 입력 받기 
-n,m = map(int,input().split())
-#시작 노드 번호를 입력받기
-start = int(input())
+INF = int(1e9)
+
+#N, M 
+N,M = map(int,input().split())
+
 #각 노드에 연결되어 있는 노드에 대한 정보를 담는 리스트 만들기
-graph = [ [] for i in range(n+1)]
-#방문한적이 있는지 체크하는 목적의 리스트를 만들기
-visited = [False]*(n+1)
+graph = [ [] for i in range(N+1)]
 #최단 거리 테이블을 모두 무한으로 초기화
-distance = [INF] * (n+1)
+distance = [INF] * (N+1)
 
 #모든 간선 정보를 입력받기
-for _ in range(m):
-    a,b,c = map(int, input().split())
+for _ in range(M):
+    a,b = map(int, input().split())
     # a번 노드에서 b번 노드로 가는 비용이 c라는 의미
-    graph[a].append((b,c))
+    graph[a].append((b,1))
+    # 양방향 이동 가능
+    graph[b].append((a,1))
 
+X,K = map(int,input().split())
 
 def dijkstra(start):
     q = []
@@ -46,14 +50,14 @@ def dijkstra(start):
 
 
 #다익스트라 알고리즘 수행 
-dijkstra(start)
+dijkstra(1)
+Kdist = distance[K]
+distance = [INF] * (N+1)
+dijkstra(K)
+Xdist = distance[X]
 
-#모든 노드로 가기 위한 최단 거리를 출력
-for i in range(1,n+1):
-    #도달할 수 없는 경우, 무한(INFINITY)이라고 출력
-    if distance[i] == INF:
-        print("INFINITY")
-    #도달할 수 있는 경우 거리를 출력
-    else:
-        print(distance[i])
-        
+if Kdist == INF or Xdist == INF:
+    print(-1)
+else:
+    print(Kdist+Xdist)
+
