@@ -21,7 +21,6 @@ A,B = map(int,input().split())
 
 cnt = 1
 
-
 while B>A:
     cnt+=1
     #B의 1의 자리수 
@@ -30,7 +29,6 @@ while B>A:
         B=tenone(B)
     elif oneNum%2==0:
         B=twodivide(B)
-    #3,5,7,9가 1의 자리에 오면 애초에 만들질 못함.
     else:
         break
 
