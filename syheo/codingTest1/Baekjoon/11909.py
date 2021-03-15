@@ -9,42 +9,39 @@
 # 1≤i<n,j=n이라면 A[i+1][j]로만 건너갑니다. 하 
 # i=j=n인 경우 바로 출구로 갑니다.
 
-import sys, heapq
+import sys
 input=sys.stdin.readline
 INF = int(1e9)
 
 n = int(input())
-maps = []
-maps.append([INF]*(n+1))
+maps = [[INF]*(n+1)]
 #배열 입력 
 for i in range(n):
-    tmp = [INF]+list(map(int,input().split()))
-    maps.append(tmp)
+    maps.append([INF]+list(map(int,input().split())))
 
 #비용 초기화
-cost = [[0]*(n+1) for _ in range(n+1)]
+cost = [[0 for _ in range(n+1)] for _ in range(n+1)]
 
-cost[1][1]=0
+def cal(a,b):
+    if a>b:
+        return 0
+    else:
+        return b-a+1
+
 #디피 
-for i in range(1,n+1):
-    for j in range(1,n+1):
-            if j-1==0 and i-1==0:
-                continue
-            elif j-1==0:
-                button2 = cost[i-1][j] if maps[i][j]<maps[i-1][j] else maps[i][j]-maps[i-1][j] + 1 + cost[i-1][j]
-                cost[i][j]+=button2
-            elif i-1==0:
-                button1 = cost[i][j-1] if maps[i][j]<maps[i][j-1] else maps[i][j]-maps[i][j-1] + 1 + cost[i][j-1]
-                cost[i][j]+=button1  
-            else:
-                button1 = cost[i][j-1] if maps[i][j]<maps[i][j-1] else maps[i][j]-maps[i][j-1] + 1 + cost[i][j-1]
-                button2 = cost[i-1][j] if maps[i][j]<maps[i-1][j] else maps[i][j]-maps[i-1][j] + 1 + cost[i-1][j]
-                cost[i][j]+=min(button1,button2)
-# for i in range(n+1):
-#     for j in range(n+1):
-#         print(cost[i][j],end=" ")
-#     print('')
-print(cost[n][n])   
+def dp():
+    for i in range(1,n+1):
+        for j in range(1,n+1):
+                if j-1==0 and i-1==0:
+                    continue
+                elif j-1==0:
+                    cost[i][j]+=cal(maps[i-1][j],maps[i][j]) + cost[i-1][j]
+                elif i-1==0:
+                    cost[i][j]+=cal(maps[i][j-1],maps[i][j]) + cost[i][j-1]  
+                else:
+                    cost[i][j]+=min(cal(maps[i][j-1],maps[i][j]) + cost[i][j-1],cal(maps[i-1][j],maps[i][j]) + cost[i-1][j])
+    print(cost[n][n])   
+dp()
 # #다익스트라 실패 
 # def dijkstra():
 #     q=[]
