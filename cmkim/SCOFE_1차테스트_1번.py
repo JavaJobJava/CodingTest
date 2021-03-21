@@ -24,12 +24,15 @@ for i in range(n):
 
     if maxtime < stime:            #시작 시간중 가장 큰, 늦은 시간 구하기
         maxtime = stime
-    if maxtime == stime and maxmin < smin:
+        maxmin = smin
+
+    elif maxtime == stime and maxmin < smin:
         maxmin = smin
 
     if mintime > etime:             #종료 시간중 가장 작은, 빠른 시간 구하기
         mintime = etime
         minmin = emin
+
     elif mintime == etime and minmin > emin:
         minmin = emin
 
