@@ -3,6 +3,9 @@
 #BFS
 #섬의 개수
 #4963
+
+#인접 행렬 방식으로 풀이
+
 from collections import deque
 import sys 
 input = sys.stdin.readline
@@ -21,8 +24,8 @@ while True:
     visited = [[False]*(w+2) for _ in range(h+2)]  
     q = deque([])
     cnt = 0
-    for i in range(1,h+2):
-        for j in range(1,w+2):
+    for i in range(1,h+1):
+        for j in range(1,w+1):
             if not visited[i][j] and maps[i][j]==1:
                 q.append((i,j))
                 visited[i][j]=True

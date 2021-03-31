@@ -21,12 +21,12 @@ for i in range(int(input())):
     #도착점이 index , 시작점이 value 
     arr = list(map(int,input().split()))
     arr.insert(0,0)
-    ladder = [0 for _ in range(N)] 
+    #ladder = [0 for _ in range(N)] 
     #카운트 변수 
     cnt = 0
     #swapping 해서 1번~N번까지 위치를 찾아주며 오름차순 정렬  
     for j in range(1,N+1):
-        #cur이 j의 위치로 가야 되는 index 값 
+        #cur이 j의 위치로 가야 되는 index 값 0  1  6  2 3  4 5 7 
         cur = arr.index(j)
         if cur!=j:
             cnt+=abs(cur-j)
