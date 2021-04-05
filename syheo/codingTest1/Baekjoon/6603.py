@@ -1,6 +1,6 @@
 #solved.ac
 #실버2
-#
+#조합
 #로또
 #6603
 import sys
