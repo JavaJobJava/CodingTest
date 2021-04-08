@@ -9,4 +9,4 @@ for i in range(len(arr[0])):
         temp = arr[0][i]
         count += 1
 
-print(count//2)
+print((count+1)//2)
