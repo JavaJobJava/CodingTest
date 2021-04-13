@@ -4,9 +4,9 @@
  * @author Sam Kim (samkim2626@gmail.com)
  * 
  * DFS
- * 음료수 얼려먹기 문제랑 비슷?
+ * 음료수 얼려먹기 문제랑 비슷
  * 
- * 백준 테스트 케이스 맞왜틀?
+ * 백준 테스트 케이스 맞왜틀? -> 입출력 주석제거해서 통과
  */
 #include <iostream>
 #include <vector>
@@ -17,7 +17,9 @@ using namespace std;
 
 int n, cnt;
 int map[26][26];
-bool visited[26][26];
+bool visited[26][26] = {
+    false,
+};
 vector<int> cnts;
 pair<int, int> dir[4] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
@@ -43,8 +45,8 @@ void dfs(int x, int y)
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(nullptr);
 
     cin >> n;
     for (int i = 1; i <= n; i++)
