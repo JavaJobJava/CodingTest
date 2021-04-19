@@ -7,37 +7,47 @@
 #효율성 있게 하기 어려웠음.
 import heapq
 
+def keys(a):
+    return a[1]
+
 # food_times = [3,1,2]
 # k=5
-food_times = [3, 2, 2, 1, 1, 2, 4, 5]
-k= 12
-# food_times = [2, 2, 2, 1, 1, 2, 2, 2]
+# food_times = [3, 2, 2, 1, 1, 2, 4, 5]
+# k= 12
+# food_times = [2, 2, 2, 1, 1, 2, 2, 2] 
 # k= 14
+# food_times = [7, 8, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2]
+# k = 35
+food_times = [1, 6, 9, 3, 2, 5, 3, 2, 4, 4, 4, 7]
+k = 26
 def solution(food_times, k):
     answer = 0
-    rest = k
-    length = len(food_times)
+    fixLength = len(food_times)
+    length = fixLength
     rotation = 1
-    q = [0 for _ in range(length)]
-    for i in range(length):
-        q[i]=(food_times[i],i)
-    
-    heapq.heapify(q)
+    curIdx = 0
+    cnt = 0 
+    for i in range(fixLength):
+        food_times[i]=(food_times[i],i)
+    food_times.sort()
 
-    while True:
-        if  q and rest//len(q):  
-            rest-=1*len(q)
-            while q and q[0][0]==rotation:
-                heapq.heappop(q)
-            rotation+=1
-        else:
-            q.sort(key=lambda x : x[1])
-            #큐가 비어있을 떄 (더 이상 먹을 음식이 없음)
-            if len(q)==0:
-                answer = -1
-            else:
-                answer = q[rest][1]+1
-            break
+    while k//length:
+        k-=length
+        cnt+=curIdx 
+        while food_times[curIdx]==rotation:
+            curIdx+=1
+            length-=1
+            if curIdx==len(food_times):
+                return -1
+        rotation+=1
+        print(curIdx)
+
+    food_times.sort(key=keys)
+    print(food_times,k+cnt)
+    answer = food_times[(k+cnt+1)%fixLength][1]+1
+    
+    answer += 1
+     
 
     return answer
 
