@@ -6,50 +6,35 @@
 #엄청 오래 걸림
 #효율성 있게 하기 어려웠음.
 import heapq
+from collections import deque
 
-def keys(a):
-    return a[1]
-
-# food_times = [3,1,2]
-# k=5
-# food_times = [3, 2, 2, 1, 1, 2, 4, 5]
-# k= 12
-# food_times = [2, 2, 2, 1, 1, 2, 2, 2] 
-# k= 14
-# food_times = [7, 8, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2]
-# k = 35
-food_times = [1, 6, 9, 3, 2, 5, 3, 2, 4, 4, 4, 7]
-k = 26
 def solution(food_times, k):
     answer = 0
-    fixLength = len(food_times)
-    length = fixLength
+    rest = k
+    length = len(food_times)
     rotation = 1
-    curIdx = 0
-    cnt = 0 
-    for i in range(fixLength):
-        food_times[i]=(food_times[i],i)
-    food_times.sort()
-
-    while k//length:
-        k-=length
-        cnt+=curIdx 
-        while food_times[curIdx]==rotation:
-            curIdx+=1
-            length-=1
-            if curIdx==len(food_times):
-                return -1
-        rotation+=1
-        print(curIdx)
-
-    food_times.sort(key=keys)
-    print(food_times,k+cnt)
-    answer = food_times[(k+cnt+1)%fixLength][1]+1
-    
-    answer += 1
-     
+    q = []
+    #(식사시간, 음식 위치)를 우선순위 큐에 넣어줌 O(logN)xN
+    for i in range(length):
+        heapq.heappush(q,(food_times[i],i))
+    while True:
+        #큐에 음식이 있고, 로테이션 1회 진행 가능시 
+        if  q and rest//len(q):  
+            #남은 횟수
+            rest-=1*len(q)
+            #큐에 음식이 있고, rotation만큼 돌릴 수 있는 음식 제거 
+            while q and q[0][0]==rotation:
+                heapq.heappop(q)
+            #로테이션 1증가 
+            rotation+=1
+        else:
+            #음식 번호로 정렬 O(NlogN)
+            q.sort(key=lambda x : x[1])
+            #큐에 남은 음식이 없을 경우 
+            if len(q)==0:
+                answer = -1
+            else:
+                answer = q[rest][1]+1
+            break
 
     return answer
-
-
-print(solution(food_times,k))
