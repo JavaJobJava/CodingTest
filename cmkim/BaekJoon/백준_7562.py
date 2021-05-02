@@ -16,6 +16,7 @@ def bfs(x, y, count):  # x -> row | y -> col
             ny = y + dy[i]
             if 0 <= nx < n and 0 <= ny < n and visited[nx][ny] == 0:
                 visited[nx][ny] = 1
+
                 dp[nx][ny] = count + 1
                 q.append((nx, ny, count + 1))
 
@@ -27,9 +28,12 @@ for _ in range(T):
     arr = [[0] * n for __ in range(n)]
     dp = [[INF] * n for __ in range(n)]
     visited = [[0] * n for __ in range(n)]
-    visited[start[0]][start[1]] = 1
+
+
     start = list(map(int, input().split()))
     dest = list(map(int, input().split()))
+    visited[start[0]][start[1]] = 1
+
 
     q = deque()
     q.append((start[0], start[1], 0))
