@@ -22,12 +22,12 @@ int solution(vector<int> food_times, long long k)
     int answer = 0;
 
     long long sum = accumulate(food_times.begin(), food_times.end(), 0LL);
-    if (sum < k)
+    if (sum <= k)
     {
         return -1;
     }
 
-    // 정렬 전 time과 index를 저장
+    // 우선순위 큐로 time과 index를 저장: 시간이 가장 적게 걸리는 음식 순
     priority_queue<pair<int, int>> tni;
     for (int i = 0; i < food_times.size(); i++)
     {
@@ -35,20 +35,31 @@ int solution(vector<int> food_times, long long k)
     }
 
     int nFoods = food_times.size(); // 남은 음식의 개수
-    int sumTime = 0;                // 먹는데 걸린 총 시간
+    int prev = 0;                   // 이전 음식 개수
     while (1)
     {
         pair<int, int> top = tni.top();
-
-        if (sumTime + (-top.first) * nFoods > k)
+        if ((-top.first - prev) * nFoods > k) // 더 이상 돌지 못하는 경우
         {
-            answer = (k - sumTime) % nFoods break;
+            break;
         }
-
-        sumTime += (-top.first) * nFoods;
+        k -= (-top.first - prev) * nFoods;
+        prev = -top.first;
         tni.pop();
         nFoods--;
     }
+
+    // 존재하는 음식 인덱스 정렬
+    vector<int> remains;
+    while (!tni.empty())
+    {
+        int idx = tni.top().second;
+        remains.push_back(idx);
+        tni.pop();
+    }
+    sort(remains.begin(), remains.end());
+
+    answer = remains[int(k % remains.size())];
 
     return answer;
 }
