@@ -4,6 +4,8 @@
 #서강 그라운드
 #14938
 
+#bfs 풀이 
+
 from collections import deque
 
 #지역의 개수,수색 범위, 길의 개수
@@ -27,7 +29,9 @@ def bfs(start):
         for info in graph[v]:
             node = info[0]
             cost = info[1]
+            #거리 만족 시
             if dist+cost <= m:
+                #방문안한 노드만 더해줌 
                 if not visited[node]:
                     sum += itemList[node]
                 q.append((node,dist+cost))
