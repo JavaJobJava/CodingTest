@@ -18,7 +18,6 @@ def solution(t, r):
         for k in range(len(wait)):
             index = min(index, wait[k][1])
 
-        #print(wait)
         for k in range(len(wait)):
             if wait[k][1] == index:
                 pop_id = k

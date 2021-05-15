@@ -7,7 +7,6 @@ import sys
 def solution(code, day, data):
     answer = []
     q = []
-
     for i in data:
         arr = i.split(' ')
         time = []
