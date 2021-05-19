@@ -16,10 +16,12 @@ K = int(input())
 
 #0: 빈칸, 1:사과, 2:뱀 몸통
 maps = [[0]*(N+1) for _ in range(N+1)]
+#사과 입력 
 for i in range(K):
     a,b = map(int,input().split())
     maps[a][b]=1
 
+#방향전환 입력 
 opCnt = int(input())
 ops = deque([])
 for i in range(opCnt):
@@ -44,12 +46,14 @@ while not gameover:
                     break
                 else:
                     snake.append((row,col))
-                    maps[row][col]=2
                     if maps[row][col]==0:
                         a,b = snake.popleft()
                         maps[a][b]=0
+                    maps[row][col]=2
                 time+=1
-        else:
+        time+=1
+        #X시간으로 만들어버리고 진행
+        if not gameover:
             if C=='L':
                 direction=direction-1 if direction>0 else 3
             elif C=='D':
@@ -60,27 +64,23 @@ while not gameover:
                 break
             else:
                 snake.append((row,col))
-                maps[row][col]=2
                 if maps[row][col]==0:
                     a,b = snake.popleft()
                     maps[a][b]=0
-        time+=1
+                maps[row][col]=2
                     
     else:
+        time+=1
         row = row+moves[direction][0]
         col = col+moves[direction][1] 
         if (row<=0 or row>N) or (col<=0 or col>N) or maps[row][col]==2:
-            print('s')
             break
-
         else:
             snake.append((row,col))
-            maps[row][col]=2
             if maps[row][col]==0:
                 a,b = snake.popleft()
                 maps[a][b]=0
-        time+=1
-            
+            maps[row][col]=2            
 
 print(time)
 
