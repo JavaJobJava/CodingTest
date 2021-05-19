@@ -5,15 +5,16 @@
 #5972
 
 #다익스트라 
-
+import sys
 import heapq
+input = sys.stdin.readline
 
-def dijkstra(N,dp):
+def bfs(N,dp):
     q = []
-    heapq.heappush(q,(1,0)) #현재 위치, 여물 수 
+    heapq.heappush(q,(0,1)) #여물 수, 현재 위치  
     dp[1]=0
     while q:
-        node, cost = heapq.heappop(q)
+        cost, node = heapq.heappop(q)
         if dp[node]<cost:
             continue
         for info in graphs[node]:
@@ -21,7 +22,7 @@ def dijkstra(N,dp):
             c = info[1]
             if dp[dest]>cost+c:
                 dp[dest]=cost+c
-                heapq.heappush(q,(dest,cost+c))
+                heapq.heappush(q,(cost+c,dest))
 
 
 N,M = map(int,input().split())    
@@ -34,7 +35,6 @@ for i in range(M):
 
 dp = [INF for _ in range(N+1)]
 
-dijkstra(N,dp)
+bfs(N,dp)
 
 print(dp[N])
-
