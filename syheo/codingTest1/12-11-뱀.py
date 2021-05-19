@@ -25,7 +25,8 @@ for i in range(K):
 opCnt = int(input())
 ops = deque([])
 for i in range(opCnt):
-    ops.append(tuple(map(str,input().split())))
+    a,b = map(str,input().split())
+    ops.append((int(a),b))
 
 time = 0
 moves = [(0,1),(1,0),(0,-1),(-1,0)] #우하좌상
@@ -33,54 +34,30 @@ direction = 0
 row , col = 1, 1
 snake = deque([(row,col)])
 maps[row][col]=2
-gameover = False
-while not gameover:
-    if ops:
-        X,C = ops.popleft()
-        if time != int(X):
-            while time != int(X): 
-                row = row+moves[direction][0]
-                col = col+moves[direction][1]
-                if (row<=0 or row>N) or (col<=0 or col>N) or maps[row][col]==2:
-                    gameover = True
-                    break
-                else:
-                    snake.append((row,col))
-                    if maps[row][col]==0:
-                        a,b = snake.popleft()
-                        maps[a][b]=0
-                    maps[row][col]=2
-                time+=1
-        time+=1
-        #X시간으로 만들어버리고 진행
-        if not gameover:
-            if C=='L':
-                direction=direction-1 if direction>0 else 3
-            elif C=='D':
-                direction=direction+1 if direction<3 else 0
-            row = row+moves[direction][0]
-            col = col+moves[direction][1]
-            if (row<=0 or row>N) or (col<=0 or col>N) or maps[row][col]==2:
-                break
-            else:
-                snake.append((row,col))
-                if maps[row][col]==0:
-                    a,b = snake.popleft()
-                    maps[a][b]=0
-                maps[row][col]=2
-                    
+
+while True:
+    #시간 1초 증가
+    time += 1
+    #이동
+    row = row+moves[direction][0]
+    col = col+moves[direction][1]
+    if (row<=0 or row>N) or (col<=0 or col>N) or maps[row][col]==2:
+        gameover = True
+        break
     else:
-        time+=1
-        row = row+moves[direction][0]
-        col = col+moves[direction][1] 
-        if (row<=0 or row>N) or (col<=0 or col>N) or maps[row][col]==2:
-            break
-        else:
-            snake.append((row,col))
-            if maps[row][col]==0:
-                a,b = snake.popleft()
-                maps[a][b]=0
-            maps[row][col]=2            
+        snake.append((row,col))
+        if maps[row][col]==0:
+            a,b = snake.popleft()
+            maps[a][b]=0
+        maps[row][col]=2
+    #명령 시간이 되었다면 
+    if ops and ops[0][0]==time:
+        X,C = ops.popleft()
+        if C=='L':
+            direction=direction-1 if direction>0 else 3
+        elif C=='D':
+            direction=direction+1 if direction<3 else 0
+
 
 print(time)
 
