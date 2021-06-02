@@ -34,10 +34,12 @@ def bfs():
             r = row + dx[i]
             c = col + dy[i]
             if 0<r<=N and 0<c<=N: 
+                #해당 장소에 바이러스가 없으면?
                 if maps[r][c][0] == 0:
                     maps[r][c]=(maps[row][col][0],cnt+1)
                     q.append((r,c,cnt+1))
-                elif maps[r][c][0] > maps[row][col][0] and maps[r][c][1] == maps[row][col][1]:
+                #같은 시간대에 먼저 간 바이러슨데 걔가 나보다 우선순위가 낮다면?
+                elif maps[r][c][0] > maps[row][col][0] and maps[r][c][1] == cnt:
                     maps[r][c]=(maps[row][col][0],cnt+1)
                     q.append((r,c,cnt+1))
 
