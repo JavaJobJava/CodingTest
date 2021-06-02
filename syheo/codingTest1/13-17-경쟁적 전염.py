@@ -39,7 +39,7 @@ def bfs():
                     maps[r][c]=(maps[row][col][0],cnt+1)
                     q.append((r,c,cnt+1))
                 #같은 시간대에 먼저 간 바이러슨데 걔가 나보다 우선순위가 낮다면?
-                elif maps[r][c][0] > maps[row][col][0] and maps[r][c][1] == cnt:
+                elif maps[r][c][0] > maps[row][col][0] and maps[r][c][1] == cnt+1:
                     maps[r][c]=(maps[row][col][0],cnt+1)
                     q.append((r,c,cnt+1))
 
