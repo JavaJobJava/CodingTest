@@ -1,7 +1,7 @@
 #프로그래머스 
 #고득점 Kit
 #bfs/dfs
-#level3
+#level2
 #타겟 넘버
 
 from collections import deque
