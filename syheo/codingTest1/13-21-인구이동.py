@@ -51,7 +51,6 @@ while True:
     #연합 그룹이 아예 없는 경우 
     if not locations:
         break
-    
     #인구 이동 
     for location in locations:
         total = sum([maps[i][j] for i,j in location])
