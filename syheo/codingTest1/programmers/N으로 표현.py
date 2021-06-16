@@ -7,30 +7,43 @@
 N =5
 number = 12
 
+import math
+
+def add_repeat_num(num,k):
+    rst = ''
+    for i in range(k):
+        rst+=str(num)
+    return int(rst)
+
 def solution(N, number):
-    answer = 0
-    dp = [[number]*37 for _ in range(9)]
+    answer = 1
+    #index -> 숫자 갯수, dp[index] -> index개로 만들 수 있는 숫자들 
+    dp=[set() for _ in range(9)]
     
-    if number == N: 
-        return 1
-    answer = 2 
-    while answer<=8:
-        for j in range(36):
-            print(j,answer)
-            if j//6==0:
-                dp[answer][j]=dp[answer-1][j//6]+number
-            elif j//6==1:
-                dp[answer][j]=dp[answer-1][j//6]*number
-            elif j//6==2:
-                dp[answer][j]=dp[answer-1][j//6]-number
-            elif j//6==3:
-                dp[answer][j]=dp[answer-1][j//6]//number
-            elif j//6==5:
-                dp[answer][j]=dp[answer-1][j//6]+number*pow(10,len(str(number)))
-            if dp[answer][j]==N:
-                print('ad')
-                return answer 
-        answer +=1
+    while True:
+        dp[answer].add(add_repeat_num(N,answer))
+        # 답 체크(탈출조건1)
+        if number in dp[answer]:
+            break
+        answer += 1
+        # 탈출조건2
+        if answer > 8:
+            answer = -1
+            break
+        # make new numbers 
+        for i in range(1,answer):
+            for a in dp[i]:
+                for b in dp[answer-i]:
+                    #순서 상관 없는 연산 : +, *
+                    dp[answer].add(a+b)
+                    dp[answer].add(a*b)
+                    #순서 상관 있는 연산 : //,- 
+                    if b!=0:
+                        dp[answer].add(a//b)
+                    if a!=0:
+                        dp[answer].add(b//a)
+                    dp[answer].add(a-b)
+                    dp[answer].add(b-a)
 
     return answer
 
