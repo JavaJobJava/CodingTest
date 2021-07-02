@@ -4,8 +4,6 @@
 #
 # print(a[(n - 1) // 2])
 
-
-
 n = int(input())
 arr = []
 arr = list(map(int, input().split()))
