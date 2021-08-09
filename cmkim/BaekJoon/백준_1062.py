@@ -1,3 +1,4 @@
+
 from itertools import combinations
 from string import ascii_lowercase
 
@@ -36,4 +37,5 @@ for i in range(n):
 
 brute_force(0, 0)
     #for i in range(len(check)):
+
 

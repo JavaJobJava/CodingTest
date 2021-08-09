@@ -1,3 +1,4 @@
+
 from _collections import deque
 from itertools import combinations
 import sys, copy
@@ -40,3 +41,4 @@ if not ans:
     print(-1)
 else:
     print(ans)
+
