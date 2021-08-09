@@ -25,3 +25,4 @@ for i in arr2:
             print(0, end="\n")
     else:
         print(0, end="\n")
+
