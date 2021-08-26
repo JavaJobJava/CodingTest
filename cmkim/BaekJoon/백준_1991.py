@@ -29,7 +29,7 @@ for _ in range(n):
     root, left, right = input().split()
     tree[root] = [left, right]
 
-#print(tree)
+print(tree)
 rab('A')
 print('')
 arb('A')
