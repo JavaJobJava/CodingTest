@@ -12,7 +12,7 @@ for i in range(n-1):
     tree[a].append(b)
     tree[b].append(a)
 
-#print(tree)
+
 
 def bfs(root):
   visited[root] = True
@@ -27,4 +27,6 @@ def bfs(root):
 
 bfs(1)
 
+
 print(min(dp[1][0], dp[1][1]))
+
