@@ -2,7 +2,7 @@ from collections import deque
 def DFS(v, visited):
 
     visited[v] = 1
-    print(v, end = ' ') # end= ' '  -> 다음 출력값 사이의 간격 조정(줄바꿈도 생략가능)
+    print(v, end=' ') # end= ' '  -> 다음 출력값 사이의 간격 조정(줄바꿈도 생략가능)
 
     for i in range(1, n+1):
 
