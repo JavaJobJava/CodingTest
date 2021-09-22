@@ -3,6 +3,7 @@ from collections import deque
 dx = [-1, 1, 0, 0]  # 상하좌우
 dy = [0, 0, -1, 1]
 
+
 way = {'|': [0, 1], '-': [2, 3], '+': [0, 1, 2, 3], '1': [1, 3], '2': [0, 3], '3': [0, 2],
        '4': [1, 2]}
 
@@ -68,6 +69,7 @@ arr = [list(input()) for _ in range(r)]
 # for i in range(r):
 #     print(arr[i])
 
+
 for i in range(r):
     for j in range(c):
         if arr[i][j] == 'M':
@@ -124,3 +126,4 @@ M.Z
 2.3
 
 '''
+

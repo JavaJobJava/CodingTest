@@ -28,5 +28,6 @@ def bfs(root):
 
 bfs(1)
 
+
 print(min(dp[1][0], dp[1][1]))
 
