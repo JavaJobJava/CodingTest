@@ -1,6 +1,5 @@
 import sys
 input = sys.stdin.readline
-
 sys.setrecursionlimit(10**9)
 n = int(input())
 tree = [[] for _ in range(n+1)]
@@ -27,6 +26,7 @@ def bfs(root):
       dp[root][1] += min(dp[i][0], dp[i][1])
 
 bfs(1)
+
 
 print(min(dp[1][0], dp[1][1]))
 
