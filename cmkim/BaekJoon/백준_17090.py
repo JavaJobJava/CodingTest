@@ -1,15 +1,17 @@
 import sys
-sys.setrecursionlimit(10**9)
+
+sys.setrecursionlimit(10 ** 9)
 
 dir = {'U': (-1, 0), 'R': (0, 1), 'D': (1, 0), 'L': (0, -1)}
 
+
 def dfs(x, y):
-    if 0 > x or x >= n or 0 > y or y >= m: #탈출
+    if 0 > x or x >= n or 0 > y or y >= m:  # 탈출
         return True
 
-    if arr[x][y] == 'true':# 탈출 확정된 곳
+    if arr[x][y] == 'true':  # 탈출 확정된 곳
         return True
-    elif arr[x][y] == 'false':# 탈출 불가능 확정된 곳
+    elif arr[x][y] == 'false':  # 탈출 불가능 확정된 곳
         return False
 
     if visited[x][y]:
@@ -27,7 +29,7 @@ def dfs(x, y):
 
 n, m = map(int, input().split())
 arr = []
-visited = [[0]*m for _ in range(n)]
+visited = [[0] * m for _ in range(n)]
 for i in range(n):
     arr.append(list(input()))
 
@@ -44,4 +46,3 @@ for x in range(n):
             count += 1
 
 print(count)
-

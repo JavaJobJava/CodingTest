@@ -1,4 +1,5 @@
 import sys, math, heapq
+
 n = int(input())
 
 arr = []
@@ -6,8 +7,10 @@ connected = []
 sum = 0
 cost = 1e9
 
+
 def dist(x1, y1, x2, y2):
-    return math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
+    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
 
 for i in range(n):
     x, y = map(float, input().split())
@@ -33,16 +36,4 @@ while n != len(connected):
         if i not in connected:
             heapq.heappush(q, (dist(arr[node][0], arr[node][1], arr[i][0], arr[i][1]), i))
 
-print("%.2f"%(sum))
-
-
-
-
-
-
-
-
-
-
-
-
+print("%.2f" %(sum))
